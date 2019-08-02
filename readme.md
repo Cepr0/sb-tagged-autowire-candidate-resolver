@@ -5,7 +5,7 @@ _An example of custom implementation of Spring [AutowireCandidateResolver][1]_
 that makes it possible to get collections of injected Spring beans 
 tagged by specified 'tags'. Tags are specified with [@Tags][3] annotation 
 in style of `@Qualifier` annotation. Collection is formed from the beans 
-that have the same tags as the autowired collection.
+that have the same type and the same tags as the autowired collection.
 
 ```java
 @Autowired
@@ -45,7 +45,7 @@ static class Beans {
    }
 }
 ``` 
-Here Map `greetingOrOther` will have three beans: `hi`, `hello` and `other`;
+Here Map `greetingOrOther` will have three `Supplier<String>` beans: `hi`, `hello` and `other`;
 
 To make it work you have to register a `CustomAutowireConfigurer` bean in your application
 and provide it with `TaggedAutowireCandidateResolver`:
