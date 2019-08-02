@@ -47,6 +47,22 @@ static class Beans {
 ``` 
 Here Map `greetingOrOther` will have three beans: `hi`, `hello` and `other`;
 
+To make it work you have to register a `CustomAutowireConfigurer` bean in your application
+and provide it with `TaggedAutowireCandidateResolver`:
+
+```java
+@Configuration
+public class AutowireConfig {
+   @Bean
+   public CustomAutowireConfigurer autowireConfigurer(DefaultListableBeanFactory beanFactory) {
+      CustomAutowireConfigurer configurer = new CustomAutowireConfigurer();
+      beanFactory.setAutowireCandidateResolver(new TaggedAutowireCandidateResolver());
+      configurer.postProcessBeanFactory(beanFactory);
+      return configurer;
+   }
+}
+```
+
 More usage examples are in [Test][4]
 
 This project is related to this [SO post][5].
