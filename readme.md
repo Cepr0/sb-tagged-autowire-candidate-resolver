@@ -47,7 +47,7 @@ static class Beans {
 ``` 
 Here Map `greetingOrOther` will have three `Supplier<String>` beans: `hi`, `hello` and `other`;
 
-To make it work you have to register a `CustomAutowireConfigurer` bean in your application
+To make it work you have to register a [CustomAutowireConfigurer][6] bean in your application
 and provide it with `TaggedAutowireCandidateResolver`:
 
 ```java
@@ -72,3 +72,4 @@ This project is related to this [SO post][5].
 [3]: src/main/java/io/github/cepr0/resolver/Tags.java
 [4]: src/test/java/io/github/cepr0/resolver/TaggedAutowireCandidateResolverTest.java
 [5]: https://stackoverflow.com/a/57169506
+[6]: https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-custom-autowire-configurer 
