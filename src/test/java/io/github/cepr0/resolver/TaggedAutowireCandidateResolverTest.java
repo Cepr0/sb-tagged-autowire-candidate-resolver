@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +30,10 @@ public class TaggedAutowireCandidateResolverTest {
 	@Autowired
 	@Tags({"1symbol", "odd"})
 	private Map<String, Supplier<Integer>> oneSymbolOrOdd;
+
+	@Autowired
+	@Tags({"parting", "other"})
+	private Set<Supplier<String>> partingOrOther;
 
 	@Autowired
 	private TestComponent testComponent;
@@ -59,6 +64,12 @@ public class TaggedAutowireCandidateResolverTest {
 		assertThat(oneSymbolOrOdd)
 				.hasSize(4)
 				.containsOnlyKeys("eleven", "one", "two", "six");
+	}
+
+	@Test
+	public void partingOrOther() {
+		assertThat(partingOrOther).hasSize(3);
+		assertThat(partingOrOther.stream().map(Supplier::get).toArray()).containsOnly("by", "goodbye", "other");
 	}
 
 	@Test
